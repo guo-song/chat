@@ -40,7 +40,7 @@ app.get('/chat', (req, res, next) => {
 		res.redirect("/");
 		return;
 	}
-    res.render('chat',{"name":req.session.user})
+    res.render('chat',{"name":req.session.user,"alluser":alluser})
 })
 io.on('connection', (socket) => {
     socket.on('content', (msg) => {

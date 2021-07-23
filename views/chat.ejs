@@ -11,35 +11,46 @@
     p:nth-child(2n) {
         background-color: #fff;
     }
+    p:nth-child(2n-1) {
+        background-color: #eee;
+    }
+    input,button{
+        outline: none;
+    }
     .input {
         position: fixed;
         left: 0;
         bottom: 0;
         width: 100%;
-        height: 300px;
+        height: 200px;
     }
 
     #btn {
         width: 500px;
-        height: 200px;
-        border: 1px solid black;
+        height: 100px;
+        border: 1px solid rgb(16, 229, 236);
         border-radius: 4px;
     }
 
     #send {
-        height: 200px;
-        border: 1px solid black;
+        height: 50px;
+        border: 1px solid rgb(16, 229, 236);
         border-radius: 4px;
+    }
+    .chat{
+        text-align: center;
+        margin: 20px auto;
     }
 </style>
 
 <body>
     <div id="page">
-        <h3><%=name%>聊天室</h3>
+        <div class="title" style="background-color: rgb(16, 229, 236);">当前聊天室上线用户：<%=alluser%></div>
+        <div class="chat"><span class="name"><%=name%></span>聊天室</div>
         <div class="content"></div>
         <div class="input">
             <input type="text" id="btn">
-            <button type="submit" id="send">发送</button>
+            <button type="submit" id="send" style="background-color: rgb(16, 229, 236);">发送</button>
         </div>
     </div>
 </body>
@@ -48,11 +59,11 @@
 <script>
     var socket = io();
     $("#send").click(() => {
-        socket.emit("content", { name:$("h3").html(),neirong: $("#btn").val() })
+        socket.emit("content", { name:$(".name").html(),neirong: $("#btn").val() })
         $("#btn").val("");
     })
     socket.on('jishou', (msg) => {
-        $(".content").prepend(`<p><span style="color:red">${msg.name}</span>: ${msg.neirong}<p>`)
+        $(".content").append(`<p><span style="color:red">${msg.name}</span>: ${msg.neirong}<p>`)
     })
 
 </script>
