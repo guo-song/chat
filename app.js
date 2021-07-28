@@ -25,14 +25,15 @@ app.get('/login', (req, res) => {
     let user = req.query.user
     if (!user) {
         res.render('error', { 'error': '请输入用户名' })
+        return;
     }
     if (alluser.indexOf('user') !== -1) {
         res.render('error', { 'error': '用户已存在' })
+        return;
     }
     alluser.push(user)
     // 临时存储用户名
     req.session.user = user
-    // window.sessionStorage.user = user
     res.redirect('/chat')
 })
 app.get('/chat', (req, res, next) => {

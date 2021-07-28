@@ -57,6 +57,7 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/jquery-1.11.3.min.js"></script>
 <script>
+   $('.title').html(name)
     var socket = io();
     $("#send").click(() => {
         socket.emit("content", { name:$(".name").html(),neirong: $("#btn").val() })
